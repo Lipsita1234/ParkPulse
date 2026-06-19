@@ -69,14 +69,29 @@ def compute_risk_scores(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_risk_summary(risk_df: pd.DataFrame) -> dict:
+    if risk_df is None or risk_df.empty:
+        return {"high_risk_count": 0, "medium_risk_count": 0, "low_risk_count": 0, "avg_risk_score": 0.0, "top_high_risk": []}
+
+    top_high = risk_df[risk_df["risk_level"] == "High"].head(10)[
+        ["location", "risk_score", "violation_count", "police_station"]
+    ].to_dict("records")
+    
+    # Clean numpy types
+    clean_top = []
+    for r in top_high:
+        clean_top.append({
+            "location": str(r["location"]),
+            "risk_score": float(r["risk_score"]),
+            "violation_count": int(r["violation_count"]),
+            "police_station": str(r["police_station"]),
+        })
+
     return {
         "high_risk_count": int((risk_df["risk_level"] == "High").sum()),
         "medium_risk_count": int((risk_df["risk_level"] == "Medium").sum()),
         "low_risk_count": int((risk_df["risk_level"] == "Low").sum()),
-        "avg_risk_score": round(risk_df["risk_score"].mean(), 1),
-        "top_high_risk": risk_df[risk_df["risk_level"] == "High"].head(10)[
-            ["location", "risk_score", "violation_count", "police_station"]
-        ].to_dict("records"),
+        "avg_risk_score": float(round(risk_df["risk_score"].mean(), 1)),
+        "top_high_risk": clean_top,
     }
 
 
