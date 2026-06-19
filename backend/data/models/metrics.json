@@ -1,0 +1,252 @@
+{
+  "LightGBM": {
+    "accuracy": 0.9153,
+    "precision": 0.9157,
+    "recall": 0.9153,
+    "f1": 0.9153,
+    "confusion_matrix": [
+      [
+        1644,
+        0,
+        74
+      ],
+      [
+        0,
+        9261,
+        844
+      ],
+      [
+        260,
+        768,
+        10120
+      ]
+    ],
+    "classes": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "feature_importance": {
+      "grid_id_enc": 10288.0,
+      "grid_historical_count": 7551.0,
+      "grid_roll_30d": 7328.0,
+      "location_roll_30d": 7132.0,
+      "grid_roll_7d": 6794.0,
+      "junction_enc": 6793.0,
+      "police_station_enc": 6216.0,
+      "location_historical_count": 6114.0,
+      "location_roll_7d": 5313.0,
+      "grid_roll_1d": 5167.0,
+      "hour_cos": 3208.0,
+      "location_roll_1d": 3048.0,
+      "hour_sin": 2505.0,
+      "location_dow_historical_count": 2470.0,
+      "location_hour_historical_count": 2459.0,
+      "dow_sin": 2096.0,
+      "vehicle_type_enc": 2001.0,
+      "month_sin": 1678.0,
+      "dow_cos": 1666.0,
+      "month_cos": 857.0
+    }
+  },
+  "XGBoost": {
+    "accuracy": 0.9048,
+    "precision": 0.9053,
+    "recall": 0.9048,
+    "f1": 0.9049,
+    "confusion_matrix": [
+      [
+        1526,
+        9,
+        183
+      ],
+      [
+        0,
+        9302,
+        803
+      ],
+      [
+        317,
+        874,
+        9957
+      ]
+    ],
+    "classes": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "feature_importance": {
+      "location_roll_30d": 0.2027,
+      "location_roll_7d": 0.1742,
+      "month_sin": 0.0714,
+      "grid_roll_7d": 0.067,
+      "police_station_enc": 0.0655,
+      "grid_id_enc": 0.0647,
+      "junction_enc": 0.0556,
+      "grid_roll_30d": 0.0433,
+      "location_historical_count": 0.0424,
+      "location_roll_1d": 0.0371,
+      "hour_cos": 0.0291,
+      "grid_historical_count": 0.0249,
+      "hour_sin": 0.0245,
+      "grid_roll_1d": 0.0213,
+      "month_cos": 0.0188,
+      "location_hour_historical_count": 0.0174,
+      "location_dow_historical_count": 0.0132,
+      "vehicle_type_enc": 0.0105,
+      "dow_sin": 0.0088,
+      "dow_cos": 0.0078
+    }
+  },
+  "CatBoost": {
+    "accuracy": 0.8831,
+    "precision": 0.8831,
+    "recall": 0.8831,
+    "f1": 0.8826,
+    "confusion_matrix": [
+      [
+        1282,
+        17,
+        419
+      ],
+      [
+        0,
+        9435,
+        670
+      ],
+      [
+        414,
+        1166,
+        9568
+      ]
+    ],
+    "classes": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "feature_importance": {
+      "police_station_enc": 14.0313,
+      "location_roll_30d": 13.7462,
+      "grid_id_enc": 12.0269,
+      "junction_enc": 8.3697,
+      "location_roll_7d": 7.8077,
+      "location_historical_count": 7.5223,
+      "month_sin": 6.153,
+      "grid_roll_30d": 5.7967,
+      "grid_roll_7d": 4.5721,
+      "grid_historical_count": 4.5096,
+      "hour_cos": 4.0608,
+      "hour_sin": 3.167,
+      "grid_roll_1d": 2.8415,
+      "vehicle_type_enc": 1.1801,
+      "location_hour_historical_count": 1.0412,
+      "dow_sin": 0.9802,
+      "dow_cos": 0.6806,
+      "location_roll_1d": 0.6507,
+      "month_cos": 0.4776,
+      "location_dow_historical_count": 0.3849
+    }
+  },
+  "RandomForest": {
+    "accuracy": 0.8798,
+    "precision": 0.8789,
+    "recall": 0.8798,
+    "f1": 0.8786,
+    "confusion_matrix": [
+      [
+        1163,
+        14,
+        541
+      ],
+      [
+        0,
+        9361,
+        744
+      ],
+      [
+        264,
+        1199,
+        9685
+      ]
+    ],
+    "classes": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "feature_importance": {
+      "location_roll_30d": 0.1286,
+      "location_roll_7d": 0.1252,
+      "grid_roll_7d": 0.0982,
+      "location_historical_count": 0.0846,
+      "grid_roll_30d": 0.0836,
+      "grid_id_enc": 0.0721,
+      "police_station_enc": 0.0623,
+      "grid_historical_count": 0.0568,
+      "junction_enc": 0.0553,
+      "location_dow_historical_count": 0.05,
+      "grid_roll_1d": 0.0486,
+      "location_roll_1d": 0.0262,
+      "hour_cos": 0.0247,
+      "location_hour_historical_count": 0.0197,
+      "month_sin": 0.0184,
+      "hour_sin": 0.0142,
+      "dow_sin": 0.0106,
+      "dow_cos": 0.0074,
+      "vehicle_type_enc": 0.0074,
+      "month_cos": 0.0062
+    }
+  },
+  "Ensemble": {
+    "accuracy": 0.9058,
+    "precision": 0.9059,
+    "recall": 0.9058,
+    "f1": 0.9058,
+    "confusion_matrix": [
+      [
+        1499,
+        7,
+        212
+      ],
+      [
+        0,
+        9310,
+        795
+      ],
+      [
+        268,
+        882,
+        9998
+      ]
+    ],
+    "classes": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "feature_importance": {
+      "grid_id_enc": 10288.0,
+      "grid_historical_count": 7551.0,
+      "grid_roll_30d": 7328.0,
+      "location_roll_30d": 7132.0,
+      "grid_roll_7d": 6794.0,
+      "junction_enc": 6793.0,
+      "police_station_enc": 6216.0,
+      "location_historical_count": 6114.0,
+      "location_roll_7d": 5313.0,
+      "grid_roll_1d": 5167.0,
+      "hour_cos": 3208.0,
+      "location_roll_1d": 3048.0,
+      "hour_sin": 2505.0,
+      "location_dow_historical_count": 2470.0,
+      "location_hour_historical_count": 2459.0,
+      "dow_sin": 2096.0,
+      "vehicle_type_enc": 2001.0,
+      "month_sin": 1678.0,
+      "dow_cos": 1666.0,
+      "month_cos": 857.0
+    }
+  }
+}

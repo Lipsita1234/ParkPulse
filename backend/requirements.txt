@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+scikit-learn
+xgboost
+lightgbm
+catboost
+shap
+joblib
+pandas
+numpy
+openpyxl
+imbalanced-learn
+optuna
+shapely
+reportlab
+python-multipart
+aiofiles

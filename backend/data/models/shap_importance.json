@@ -1,0 +1,22 @@
+{
+  "grid_id_enc": 10288.0,
+  "grid_historical_count": 7551.0,
+  "grid_roll_30d": 7328.0,
+  "location_roll_30d": 7132.0,
+  "grid_roll_7d": 6794.0,
+  "junction_enc": 6793.0,
+  "police_station_enc": 6216.0,
+  "location_historical_count": 6114.0,
+  "location_roll_7d": 5313.0,
+  "grid_roll_1d": 5167.0,
+  "hour_cos": 3208.0,
+  "location_roll_1d": 3048.0,
+  "hour_sin": 2505.0,
+  "location_dow_historical_count": 2470.0,
+  "location_hour_historical_count": 2459.0,
+  "dow_sin": 2096.0,
+  "vehicle_type_enc": 2001.0,
+  "month_sin": 1678.0,
+  "dow_cos": 1666.0,
+  "month_cos": 857.0
+}
