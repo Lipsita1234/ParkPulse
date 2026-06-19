@@ -95,8 +95,9 @@ export default function DatasetRetrainingPage() {
         }, 1500);
       })
       .catch(err => {
-        console.error(err);
-        setUploadProgress("Error: Only CSV/Excel files are supported.");
+        console.error("Upload error details:", err.response || err);
+        const errorMsg = err.response?.data?.error || err.message || "Network error. Make sure your file isn't too large.";
+        setUploadProgress(`Error: ${errorMsg}`);
         setUploading(false);
       });
   };
