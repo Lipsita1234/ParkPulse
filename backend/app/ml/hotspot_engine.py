@@ -101,23 +101,23 @@ def compute_hotspots(df: pd.DataFrame) -> list[dict]:
             risk_color = "#22C55E"
 
         # Top violations
-        top_violations = (
-            grp["violation"].value_counts().head(3).to_dict()
-            if "violation" in grp.columns else {}
-        )
+        top_violations = {}
+        if "violation" in grp.columns:
+            vc = grp["violation"].value_counts().head(3).to_dict()
+            top_violations = {str(k): int(v) for k, v in vc.items()}
 
         hotspots.append({
             "cluster_id": int(cluster_id),
-            "centroid_lat": round(centroid_lat, 6),
-            "centroid_lon": round(centroid_lon, 6),
-            "location_name": location_name,
-            "violation_count": count,
-            "dominant_vehicle": dominant_vehicle,
-            "peak_hour": peak_hour,
-            "police_station": police_station,
-            "risk_score": risk_score,
-            "risk_level": risk_level,
-            "risk_color": risk_color,
+            "centroid_lat": float(round(centroid_lat, 6)),
+            "centroid_lon": float(round(centroid_lon, 6)),
+            "location_name": str(location_name),
+            "violation_count": int(count),
+            "dominant_vehicle": str(dominant_vehicle),
+            "peak_hour": int(peak_hour),
+            "police_station": str(police_station),
+            "risk_score": int(risk_score),
+            "risk_level": str(risk_level),
+            "risk_color": str(risk_color),
             "top_violations": top_violations,
         })
 
