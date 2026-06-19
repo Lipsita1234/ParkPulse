@@ -35,13 +35,7 @@ async def upload_dataset(file: UploadFile = File(...)):
     with open(dest, "wb") as f:
         content = await file.read()
         f.write(content)
-    from app.ml.data_processor import init_processor
-    try:
-        init_processor(dest)
-    except Exception as e:
-        return JSONResponse(status_code=400, content={"error": f"Failed to parse dataset: {str(e)}"})
-
-    return {"message": f"File '{file.filename}' uploaded and loaded successfully", "path": str(dest)}
+    return {"message": f"File '{file.filename}' uploaded successfully. Ready for processing.", "path": str(dest)}
 
 
 @router.post("/retrain")
