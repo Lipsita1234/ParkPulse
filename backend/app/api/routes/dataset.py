@@ -35,6 +35,7 @@ async def upload_dataset(file: UploadFile = File(...)):
     with open(dest, "wb") as f:
         content = await file.read()
         f.write(content)
+
     return {"message": f"File '{file.filename}' uploaded successfully. Ready for processing.", "path": str(dest)}
 
 
@@ -51,7 +52,7 @@ async def retrain_status():
     return _retrain_status
 
 
-async def _run_retraining():
+def _run_retraining():
     global _retrain_status
     try:
         from app.ml.data_processor import init_processor
