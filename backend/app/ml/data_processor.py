@@ -48,7 +48,7 @@ class DataProcessor:
     # ─────────────────────────────────────────
     def load(self) -> "DataProcessor":
         path = str(self.dataset_path)
-        if path.endswith(".csv"):
+        if path.endswith((".csv", ".csv.gz", ".zip")):
             self.raw_df = pd.read_csv(path, low_memory=False)
         else:
             self.raw_df = pd.read_excel(path)
