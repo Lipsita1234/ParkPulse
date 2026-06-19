@@ -272,7 +272,7 @@ def train_models(df: pd.DataFrame) -> dict:
         _log("[MLEngine] ===========================================")
         _log("[MLEngine] Phase 1: Optuna Hyperparameter Tuning (LightGBM)")
         _log("[MLEngine] ===========================================")
-        best_lgbm_params = _optuna_tune_lgbm(X_train_scaled_raw, y_train, n_trials=5)
+        best_lgbm_params = _optuna_tune_lgbm(X_train_scaled_raw, y_train, n_trials=2)
 
         _log("[MLEngine] Training tuned LightGBM on full training set...")
         lgbm = LGBMClassifier(**best_lgbm_params)
