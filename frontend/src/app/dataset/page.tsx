@@ -181,14 +181,14 @@ export default function DatasetRetrainingPage() {
                     }}>
                       <Upload size={24} color="#64748b" style={{ margin: '0 auto 10px' }} />
                       <span style={{ fontSize: 12.5, color: '#94a3b8', display: 'block', fontWeight: 600 }}>
-                        {selectedFile ? selectedFile.name : "Choose CSV / Excel File"}
+                        {selectedFile ? selectedFile.name : "Choose CSV / Excel / ZIP File"}
                       </span>
                       <span style={{ fontSize: 11, color: '#64748b', marginTop: 4, display: 'block' }}>
                         Maximum file size: 120MB
                       </span>
                       <input
                         type="file"
-                        accept=".csv,.xlsx,.xls"
+                       accept=".csv,.xlsx,.xls,.zip,.gz"
                         onChange={handleFileChange}
                         disabled={uploading}
                         style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }}
