@@ -59,41 +59,60 @@ def _run_retraining():
         from app.ml.hotspot_engine import init_hotspots
         from app.ml.risk_engine import init_risk_engine
         from app.ml.ml_engine import train_models
-        from app.ml.shap_engine import init_shap
         from app.core.config import find_dataset
 
+        # ── Step 1: Find dataset ───────────────────────
         _retrain_status["logs"].append("Step 1/5: Finding dataset...")
         _retrain_status["progress"] = 10
         dataset_path = find_dataset()
         if not dataset_path:
-            raise RuntimeError("No dataset found")
+            raise RuntimeError("No dataset found. Please upload a CSV or ZIP file first.")
+        _retrain_status["logs"].append(f"Found dataset: {dataset_path.name}")
 
-        _retrain_status["logs"].append(f"Step 2/5: Processing {dataset_path.name}...")
+        # ── Step 2: Process data ───────────────────────
+        _retrain_status["logs"].append(f"Step 2/5: Loading & processing {dataset_path.name}...")
         _retrain_status["progress"] = 20
-        proc = init_processor(dataset_path)
+        try:
+            proc = init_processor(dataset_path)
+            _retrain_status["logs"].append(f"Data loaded: {len(proc.df)} usable records.")
+        except Exception as e:
+            raise RuntimeError(f"Data processing failed: {str(e)}")
 
+        # ── Step 3: Hotspot clustering ─────────────────
         _retrain_status["logs"].append("Step 3/5: Running DBSCAN clustering...")
         _retrain_status["progress"] = 40
-        df_clustered = init_hotspots(proc.df)
+        try:
+            df_clustered = init_hotspots(proc.df)
+        except Exception as e:
+            raise RuntimeError(f"DBSCAN clustering failed: {str(e)}")
 
+        # ── Step 4: Risk engine ────────────────────────
         _retrain_status["logs"].append("Step 4/5: Computing risk scores...")
         _retrain_status["progress"] = 55
-        init_risk_engine(df_clustered)
+        try:
+            init_risk_engine(df_clustered)
+        except Exception as e:
+            raise RuntimeError(f"Risk engine failed: {str(e)}")
 
-        _retrain_status["logs"].append("Step 5/5: Training ML models...")
+        # ── Step 5: ML Training ────────────────────────
+        _retrain_status["logs"].append("Step 5/5: Training ML models (this may take a few minutes)...")
         _retrain_status["progress"] = 70
-        cache = train_models(df_clustered)
-
-        _retrain_status["logs"].append("Initialising SHAP explainer...")
-        _retrain_status["progress"] = 90
+        try:
+            cache = train_models(df_clustered)
+        except Exception as e:
+            raise RuntimeError(f"ML training failed: {str(e)}")
 
         _retrain_status["logs"].extend(cache.get("training_logs", []))
         _retrain_status["status"] = "completed"
         _retrain_status["progress"] = 100
         _retrain_status["results"] = cache.get("results", {})
         _retrain_status["best_model"] = cache.get("best_name")
+        _retrain_status["logs"].append("Pipeline completed successfully!")
 
     except Exception as e:
+        import traceback
         _retrain_status["status"] = "error"
         _retrain_status["error"] = str(e)
         _retrain_status["logs"].append(f"ERROR: {str(e)}")
+        _retrain_status["logs"].append(f"Traceback: {traceback.format_exc()}")
+
