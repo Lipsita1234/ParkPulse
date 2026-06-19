@@ -48,10 +48,17 @@ class DataProcessor:
     # ─────────────────────────────────────────
     def load(self) -> "DataProcessor":
         path = str(self.dataset_path)
+        print(f"[DataProcessor] Reading file: {path}")
         if path.endswith((".csv", ".csv.gz", ".zip")):
-            self.raw_df = pd.read_csv(path, low_memory=False)
+            self.raw_df = pd.read_csv(path, low_memory=True)
         else:
             self.raw_df = pd.read_excel(path)
+        # Downcast numeric columns to reduce memory footprint on free-tier servers
+        for col in self.raw_df.select_dtypes(include=["float64"]).columns:
+            self.raw_df[col] = pd.to_numeric(self.raw_df[col], downcast="float")
+        for col in self.raw_df.select_dtypes(include=["int64"]).columns:
+            self.raw_df[col] = pd.to_numeric(self.raw_df[col], downcast="integer")
+        print(f"[DataProcessor] Loaded {len(self.raw_df)} rows, {len(self.raw_df.columns)} columns")
         self.quality_report["total_records"] = len(self.raw_df)
         return self
 
