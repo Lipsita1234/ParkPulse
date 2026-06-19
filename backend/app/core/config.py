@@ -19,7 +19,7 @@ CSV_FILENAME = None  # auto-detected
 
 def find_dataset() -> Path | None:
     """Auto-detect the first CSV/Excel file in the project folder."""
-    for ext in ["*.csv", "*.xlsx", "*.xls"]:
+    for ext in ["*.csv", "*.csv.gz", "*.zip", "*.xlsx", "*.xls"]:
         files = list(PROJECT_DIR.glob(ext))
         if files:
             # prefer largest file (most likely the dataset)
