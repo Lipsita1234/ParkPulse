@@ -49,7 +49,7 @@ export const getDatasetStatus = () => api.get('/api/dataset/status').then(r => r
 export const uploadDataset = (file: File) => {
   const fd = new FormData();
   fd.append('file', file);
-  return api.post('/api/dataset/upload', fd).then(r => r.data);
+   return api.post('/api/dataset/upload', fd, { timeout: 0 }).then(r => r.data);
 };
 export const startRetrain = () => api.post('/api/dataset/retrain').then(r => r.data);
 export const getRetrainStatus = () => api.get('/api/dataset/retrain/status').then(r => r.data);
