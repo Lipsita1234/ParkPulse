@@ -29,8 +29,8 @@ async def dataset_status():
 
 @router.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
-    if not (file.filename.endswith(".csv") or file.filename.endswith(".xlsx")):
-        return JSONResponse(status_code=400, content={"error": "Only CSV/Excel files supported"})
+    if not (file.filename.endswith(".csv") or file.filename.endswith(".xlsx") or file.filename.endswith(".zip") or file.filename.endswith(".csv.gz")):
+        return JSONResponse(status_code=400, content={"error": "Only CSV, Excel, ZIP, or GZ files supported"})
     dest = PROJECT_DIR / file.filename
     with open(dest, "wb") as f:
         content = await file.read()
