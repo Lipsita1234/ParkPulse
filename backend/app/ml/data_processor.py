@@ -50,9 +50,9 @@ class DataProcessor:
         path = str(self.dataset_path)
         print(f"[DataProcessor] Reading file: {path}")
         if path.endswith((".csv", ".csv.gz", ".zip")):
-            self.raw_df = pd.read_csv(path, low_memory=True)
+            self.raw_df = pd.read_csv(path, low_memory=True, nrows=25000)
         else:
-            self.raw_df = pd.read_excel(path)
+            self.raw_df = pd.read_excel(path, nrows=25000)
         # Downcast numeric columns to reduce memory footprint on free-tier servers
         for col in self.raw_df.select_dtypes(include=["float64"]).columns:
             self.raw_df[col] = pd.to_numeric(self.raw_df[col], downcast="float")
