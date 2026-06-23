@@ -82,5 +82,3 @@ ParkPulse AI features a modern, premium "Smart City Command Center" design:
 *   **Color-coded Risk Indicators:** Red (High), Orange (Medium), Green (Low).
 *   **Responsive Layout** optimized for desktop, tablet, and mobile viewing.
 
-## 📝 License
-[MIT License](LICENSE) (or specify your license here)
